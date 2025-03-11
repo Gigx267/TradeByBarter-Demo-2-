@@ -1,0 +1,51 @@
+{
+  "name": "butterx",
+  "version": "1.0.0",
+  "description": "ButterX API – A robust and scalable API for facilitating butter trade, enabling seamless transactions, inventory management, and marketplace interactions for buyers and sellers.",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon -q --exec node --env-file=./config.env -r ts-node/register src/modules/server/server.ts",
+    "start:prod": "SET NODE_ENV=production&&tsc&&node --env-file=./config.env dist/modules/server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wesoamo/trade-barter.git"
+  },
+  "author": "Agah Enoch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wesoamo/trade-barter/issues"
+  },
+  "homepage": "https://github.com/wesoamo/trade-barter#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cloudinary": "^1.41.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.11.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "streamifier": "^0.1.1",
+    "validator": "^13.12.0",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/cookie-parser": "^1.4.8",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/mongoose": "^5.11.96",
+    "@types/morgan": "^1.9.9",
+    "@types/multer": "^1.4.12",
+    "@types/node": "^22.13.7",
+    "@types/streamifier": "^0.1.2",
+    "@types/validator": "^13.12.2",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "tsc": "^2.0.4",
+    "typescript": "^5.8.2"
+  }
+}

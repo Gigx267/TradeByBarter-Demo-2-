@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            margin-top: 50px;
+            font-size: 2em;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        p {
+            font-size: 1.2em;
+        }
+
+        nav {
+            margin-top: 30px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            transition: transform 0.2s, background 0.3s;
+            cursor: pointer;
+        }
+
+        li:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+    <script>
+        function redirectToPage(url) {
+            window.location.href = url;
+        }
+
+        window.onload = async function () {
+            const params = new URLSearchParams(window.location.search);
+            const userId = params.get("user");
+            const userName = params.get("name");
+            const status = params.get("status");
+            const res = await fetch(`http://localhost:3000/api/v1/users/${userId}`)
+            if(res.status == 401){
+                window.location.href = 'login.html?redirected=true'
+            }
+
+            if (userId && status === "success") {
+                document.getElementById("username").textContent = decodeURIComponent(userName);
+                document.getElementById("userId").textContent = userId;
+            } else {
+                document.body.innerHTML = "<h2 style='color: red;'>Invalid access</h2><p>Signup or Login required.</p>";
+                setTimeout(() => {
+                    window.location.href = 'signup.html?redirected=true';
+                }, 2000);
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <h1 class="amb">Welcome, <span id="username">User</span>!</h1>
+    <p>Your ID: <span id="userId"></span></p>
+
+    <nav>
+        <ul>
+            <li onclick="redirectToPage('createProduct.html')"><a href="#">Create Product</a></li>
+        </ul>
+    </nav>
+</body>
+
+</html>
