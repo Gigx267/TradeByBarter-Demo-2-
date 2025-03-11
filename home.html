@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade By Barter </title>
+
+    <!-- 
+      - favicon
+    -->
+    <link rel="shortcut icon" href="logo1.png" type="image/svg+xml">
+
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <!-- 
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400;700&family=Saira+Stencil+One&display=swap"
+    rel="stylesheet">
+</head>
+<header class="header" data-header>
+    <div class="container">
+
+      <h1 class="h1 logo">
+        <a href="#">Trade By Barter <span>.</span></a>
+      </h1>
+
+      <div class="navbar-actions">
+
+        <select name="language" id="lang">
+          <option value="en">En</option>
+          <option value="ar">Ar</option>
+        </select>
+
+        <button class="theme-btn" aria-label="Change Theme" title="Change Theme" data-theme-btn>
+          <span class="icon"></span>
+        </button>
+
+      </div>
+
+      <button class="nav-toggle-btn" aria-label="Toggle Menu" title="Toggle Menu" data-nav-toggle-btn>
+        <span class="one"></span>
+        <span class="two"></span>
+        <span class="three"></span>
+      </button>
+
+      <nav class="navbar" data-navbar>
+        <ul class="navbar-list">
+
+          <li>
+            <a href="index.html" class="navbar-link">Home.</a>
+          </li>
+          <li>
+            <a href="createProduct.html" class="navbar-link">See Trades </a>
+          </li>
+          
+          <li>
+            <a href="signup.html" class="navbar-link">Sign Up </a>
+          </li>
+
+          <li>
+            <a href="login.html" class="navbar-link">Login</a>
+          </li>
+
+          <li>
+            <a href="createProduct.html" class="navbar-link">Post Item </a>
+          </li>
+
+       
+
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+
+<body id="top" class="dark_theme">
+
+  <!-- 
+    - #HEADER
+  -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            margin-top: 50px;
+            font-size: 2em;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        p {
+            font-size: 1.2em;
+        }
+
+        nav {
+            margin-top: 30px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            transition: transform 0.2s, background 0.3s;
+            cursor: pointer;
+        }
+
+        li:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+    <script>
+        function redirectToPage(url) {
+            window.location.href = url;
+        }
+
+        window.onload = async function () {
+            const params = new URLSearchParams(window.location.search);
+            const userId = params.get("user");
+            const userName = params.get("name");
+            const status = params.get("status");
+            const res = await fetch(`http://localhost:3000/api/v1/users/${userId}`)
+            if(res.status == 401){
+                window.location.href = 'login.html?redirected=true'
+            }
+
+            if (userId && status === "success") {
+                document.getElementById("username").textContent = decodeURIComponent(userName);
+                document.getElementById("userId").textContent = userId;
+            } else {
+                document.body.innerHTML = "<h2 style='color: red;'>Invalid access</h2><p>Signup or Login required.</p>";
+                setTimeout(() => {
+                    window.location.href = 'signup.html?redirected=true';
+                }, 2000);
+            }
+        };
+    </script>
+</head>
+<section class="hero" id="home">
+
+    <figure class="hero-banner">
+
+      <picture>
+        <source srcset="https://cdn.dribbble.com/userupload/8838656/file/original-57cb3ae7d9efd01d67fa60c2b14c0174.gif" media="(min-width: 768px)">
+        <source srcset="https://cdn.dribbble.com/userupload/8838656/file/original-57cb3ae7d9efd01d67fa60c2b14c0174.gif" media="(min-width: 500px)">
+        <img src="https://cdn.dribbble.com/userupload/8838656/file/original-57cb3ae7d9efd01d67fa60c2b14c0174.gif" alt=""
+          class="w-100">
+      </picture>
+
+    </figure>
+
+    <div class="hero-content">
+
+      <h2 class="h2 hero-title"> Find What You Need, <br>Trade What You Have  </h2>
+
+     
+      <ul  class="btn btn-primary" >
+        <li onclick="redirectToPage('createProduct.html')"><a href="#">Post  A Trade </a></li>
+    </ul>
+<br>
+<ul  class="btn btn-primary" >
+    <li onclick="redirectToPage('createProduct.html')"><a href="#">view All </a></li>
+</ul>
+    </div>
+
+    <ul class="hero-social-list">
+
+      <li>
+        <a href="#" class="hero-social-link">
+          <ion-icon name="logo-facebook"></ion-icon>
+
+          <div class="tooltip">Facebook</div>
+        </a>
+      </li>
+
+      <li>
+        <a href="#" class="hero-social-link">
+          <ion-icon name="logo-twitter"></ion-icon>
+
+          <div class="tooltip">Twitter</div>
+        </a>
+      </li>
+
+      <li>
+        <a href="#" class="hero-social-link">
+          <ion-icon name="logo-instagram"></ion-icon>
+
+          <div class="tooltip">Linkedin</div>
+        </a>
+      </li>
+
+    </ul>
+
+
+
+  </section>
+
+
+
+  <section class="project" id="portfolio">
+
+    <ul class="project-list">
+
+      <li>
+        <div class="project-content section-content">
+
+       
+
+          <h2 class="h3 section-title">Benefits of a Trade By Barter  </h2>
+
+          <p class="section-text">
+            Allows people to acquire goods and services without spending money,   <br>
+ Helps people utilize unused items and skills.<br>
+
+ Reduces waste by promoting the reuse and exchange of goods and also  <br>
+ allows for negotiation and personalized exchanges.<br>
+          </p>
+
+        </div>
+      </li>
+
+      <li>
+        <a href="#" class="project-card">
+
+          <figure class="card-banner">
+            <img src="./assets/images/project-1.png" class="w-100" alt="A macintosh on a yellow background.">
+          </figure>
+
+          <div class="card-content">
+           
+          </div>
+
+        </a>
+      </li>
+
+      <li>
+        <a href="#" class="project-card">
+
+          <figure class="card-banner">
+            <img src="./assets/images/project-2.png" class="w-100" alt="On a Blue background, a Wacom and a mouse.">
+          </figure>
+
+          <div class="card-content">
+          
+          </div>
+
+        </a>
+      </li>
+
+      <li>
+        <a href="#" class="project-card">
+
+        
+
+          <div class="card-content">
+          
+          </div>
+
+        </a>
+      </li>
+
+      <li>
+        <a href="#" class="project-card">
+
+          <figure class="card-banner">
+            <img src="./assets/images/project-4.png" class="w-100"
+              alt="Blue digital watch on a dark liver background.">
+          </figure>
+
+          <div class="card-content">
+           
+          </div>
+
+        </a>
+      </li>
+
+      <li>
+        <a href="#" class="project-card">
+
+          <figure class="card-banner">
+            <img src="./assets/images/project-5.png" class="w-100"
+              alt="On a dark liver background, Airport luggage car carrying a luggage.">
+          </figure>
+
+          <div class="card-content">
+         
+          </div>
+
+        </a>
+      </li>
+
+      <li>
+        <a href="#" class="project-card">
+
+          <figure class="card-banner">
+            <img src="./assets/images/project-6.png" class="w-100"
+              alt="On a yellow background, a digital watch and a glass.">
+          </figure>
+
+          <div class="card-content">
+           
+          </div>
+
+        </a>
+      </li>
+
+      <li>
+        <a href="#" class="project-card">
+
+          <figure class="card-banner">
+            <img src="./assets/images/project-7.png" class="w-100"
+              alt="A fujifilm instant camera on a dark electric blue background.">
+          </figure>
+
+          <div class="card-content">
+            
+          </div>
+
+        </a>
+      </li>
+
+    
+     
+
+    </ul>
+
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+ 
+    <h2 class="hero-title"></h2>
+   
+   
+
+    <nav>
+        
+    </nav>
+</body>
+ <!-- 
+    - custom js link
+  -->
+  <script src="./assets/js/script.js"></script>
+
+  <!-- 
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</html>
